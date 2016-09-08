@@ -8,6 +8,8 @@ import (
     "os"
     "regexp"
     "syscall"
+
+    "github.com/fatih/color"
 )
 
 func check(e error) {
@@ -77,7 +79,9 @@ func printuptime(fieldName bool) {
     w.Flush()
 
     if fieldName {
+        color.Set(color.FgBlue, color.Bold)
         fmt.Print("Uptime: ")
+        color.Unset()
     }
     fmt.Println(buf.String())
 }
@@ -87,7 +91,9 @@ func printhostname(fieldName bool) {
     check(err)
 
     if fieldName {
+        color.Set(color.FgBlue, color.Bold)
         fmt.Print("Hostname: ")
+        color.Unset()
     }
     fmt.Println(hostName)
 }
@@ -110,7 +116,9 @@ func printos(fieldName bool) {
     }
 
     if fieldName {
+        color.Set(color.FgBlue, color.Bold)
         fmt.Print("OS: ")
+        color.Unset()
     }
     fmt.Println(deskCodename)
 }
@@ -119,8 +127,13 @@ func main() {
 
     filterPtr := flag.String("filter", "all", "Filter output by field: all, os, host, uptime")
     fieldNamePtr := flag.Bool("name", true, "Field name: true, false")
+    flagColor := flag.Bool("no-color", false, "Disable colour output")
 
     flag.Parse()
+
+    if *flagColor {
+        color.NoColor = true    // disable colorized output
+    }
 
     switch *filterPtr {
     case "os":
