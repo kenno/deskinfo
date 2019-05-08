@@ -3,8 +3,8 @@ package main
 import (
     "bufio"
     "bytes"
-    "fmt"
     "flag"
+    "fmt"
     "os"
     "regexp"
     "syscall"
@@ -105,6 +105,8 @@ func printos(fieldName bool) {
     deskCodename := ""
 
     switch codename {
+    case "DISTRIB_CODENAME=bionic":
+        deskCodename = "Desk 11"
     case "DISTRIB_CODENAME=xenial":
         deskCodename = "Desk 10"
     case "DISTRIB_CODENAME=trusty":
@@ -132,7 +134,7 @@ func main() {
     flag.Parse()
 
     if *flagColor {
-        color.NoColor = true    // disable colorized output
+        color.NoColor = true // disable colorized output
     }
 
     switch *filterPtr {
