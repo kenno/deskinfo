@@ -105,6 +105,8 @@ func printos(fieldName bool) {
     deskCodename := ""
 
     switch codename {
+    case "DISTRIB_CODENAME=focal":
+        deskCodename = "Desk 12"
     case "DISTRIB_CODENAME=bionic":
         deskCodename = "Desk 11"
     case "DISTRIB_CODENAME=xenial":
